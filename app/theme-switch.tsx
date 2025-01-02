@@ -9,7 +9,7 @@ import clsx from "clsx";
 
 import { IconSvgProps } from "@/types";
 
-export const SunFilledIcon = ({
+const SunFilledIcon = ({
   size = 24,
   width,
   height,
@@ -31,7 +31,7 @@ export const SunFilledIcon = ({
   </svg>
 );
 
-export const MoonFilledIcon = ({
+const MoonFilledIcon = ({
   size = 24,
   width,
   height,
