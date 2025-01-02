@@ -561,6 +561,22 @@
     "@react-stately/toggle" "3.8.0"
     "@react-stately/utils" "3.10.5"
 
+"@nextui-org/pagination@^2.2.7":
+  version "2.2.7"
+  resolved "https://registry.yarnpkg.com/@nextui-org/pagination/-/pagination-2.2.7.tgz#0d9cc35662bafd795812ac13cdfa626745a59613"
+  integrity sha512-MpKkoC+HPs3kTS8JgCyP6ZpBFtlCmn9YpI11OOhYM9faQbmv8k0D+f11CCm+GRO+yEE08MCpcZHqY3OLdASW9Q==
+  dependencies:
+    "@nextui-org/react-utils" "2.1.2"
+    "@nextui-org/shared-icons" "2.1.1"
+    "@nextui-org/shared-utils" "2.1.2"
+    "@nextui-org/use-intersection-observer" "2.2.2"
+    "@nextui-org/use-pagination" "2.2.3"
+    "@react-aria/focus" "3.19.0"
+    "@react-aria/i18n" "3.12.4"
+    "@react-aria/interactions" "3.22.5"
+    "@react-aria/utils" "3.26.0"
+    scroll-into-view-if-needed "3.0.10"
+
 "@nextui-org/react-rsc-utils@2.1.1":
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/@nextui-org/react-rsc-utils/-/react-rsc-utils-2.1.1.tgz#82a545ea952fa0f98769bb446ed448cab292e5bb"
@@ -716,6 +732,16 @@
   resolved "https://registry.yarnpkg.com/@nextui-org/use-clipboard/-/use-clipboard-2.1.1.tgz#d7c72d1f95034ef79fb58bae553cf947cf983e4f"
   integrity sha512-oOkRLyd8R6zRP4s3psV5XPdYuoExnCcv46DLqVe4TajSPaWv7noRBKtkb8x/am6gZaPqxCdQ56A9gX2P8LMgGg==
 
+"@nextui-org/use-intersection-observer@2.2.2":
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/@nextui-org/use-intersection-observer/-/use-intersection-observer-2.2.2.tgz#107f4bb270c6f9f5ededd37c10173b36fe794b76"
+  integrity sha512-fS/4m8jnXO7GYpnp/Lp+7bfBEAXPzqsXgqGK6qrp7sfFEAbLzuJp0fONkbIB3F6F3FJrbFOlY+Y5qrHptO7U/Q==
+  dependencies:
+    "@react-aria/interactions" "3.22.5"
+    "@react-aria/ssr" "3.9.7"
+    "@react-aria/utils" "3.26.0"
+    "@react-types/shared" "3.26.0"
+
 "@nextui-org/use-is-mobile@2.2.2":
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/@nextui-org/use-is-mobile/-/use-is-mobile-2.2.2.tgz#3d97ffa1b1b967001fd3499f12e3e1109818372d"
@@ -727,6 +753,14 @@
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/@nextui-org/use-measure/-/use-measure-2.1.1.tgz#44ffab28413ff894af1f5cc11b7f407606030383"
   integrity sha512-2RVn90gXHTgt6fvzBH4fzgv3hMDz+SEJkqaCTbd6WUNWag4AaLb2WU/65CtLcexyu10HrgYf2xG07ZqtJv0zSg==
+
+"@nextui-org/use-pagination@2.2.3":
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/@nextui-org/use-pagination/-/use-pagination-2.2.3.tgz#e8b4b9046c199f81759415d8e54849bb159a67d4"
+  integrity sha512-V2WGIq4LLkTpq6EUhJg3MVvHY2ZJ63AYV9N0d52Dc3Qqok0tTRuY51dd1P+F58HyTPW84W2z4q2R8XALtzFxQw==
+  dependencies:
+    "@nextui-org/shared-utils" "2.1.2"
+    "@react-aria/i18n" "3.12.4"
 
 "@nextui-org/use-safe-layout-effect@2.1.1":
   version "2.1.1"
@@ -1870,6 +1904,11 @@ commander@^4.0.0:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/commander/-/commander-4.1.1.tgz#9fd602bd936294e9e9ef46a3f4d6964044b18068"
   integrity sha512-NOKm8xhkzAjzFx8B2v5OAHT+u5pRQc2UCa2Vq9jYL/31o2wi9mxBA7LIFs3sV5VSC49z6pEhfbMULvShKj26WA==
+
+compute-scroll-into-view@^3.0.2:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/compute-scroll-into-view/-/compute-scroll-into-view-3.1.0.tgz#753f11d972596558d8fe7c6bcbc8497690ab4c87"
+  integrity sha512-rj8l8pD4bJ1nx+dAkMhV1xB5RuZEyVysfxJqB1pRchh1KVvwOv9b7CGB8ZfjTImVv2oF+sYMUkMZq6Na5Ftmbg==
 
 concat-map@0.0.1:
   version "0.0.1"
@@ -4374,6 +4413,13 @@ scheduler@^0.23.2:
   integrity sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==
   dependencies:
     loose-envify "^1.1.0"
+
+scroll-into-view-if-needed@3.0.10:
+  version "3.0.10"
+  resolved "https://registry.yarnpkg.com/scroll-into-view-if-needed/-/scroll-into-view-if-needed-3.0.10.tgz#38fbfe770d490baff0fb2ba34ae3539f6ec44e13"
+  integrity sha512-t44QCeDKAPf1mtQH3fYpWz8IM/DyvHLjs8wUvvwMYxk5moOqCzrMSxK6HQVD0QVmVjXFavoFIPRVrMuJPKAvtg==
+  dependencies:
+    compute-scroll-into-view "^3.0.2"
 
 semver@^6.1.0, semver@^6.3.1:
   version "6.3.1"

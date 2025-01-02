@@ -1,6 +1,6 @@
 import * as fs from "fs";
 
-interface ArticleMetadata {
+export interface ArticleMetadata {
     title: string,
     datePosted: Date,
     author: string,
@@ -8,7 +8,7 @@ interface ArticleMetadata {
     cover: string
 }
 
-interface Article {
+export interface Article {
     metadata: ArticleMetadata,
     content: string
 }
@@ -61,10 +61,22 @@ function getArticles(dir: string): Article[] {
     return articles;
 }
 
-export function getNewsArticles(): Article[] {
-    return getArticles("./news");
+export function getPaginatedArticleMetadata(page: number): ArticleMetadata[] {
+    return getArticles("articles/news").slice((page - 1) * 10, page * 10).map(article => article.metadata);
 }
 
-export function getReviewArticles(): Article[] {
-    return getArticles("./reviews");
+export function getNewsArticles(): Article[] {
+    return getArticles("articles/news");
+}
+
+export function getReviews(): Article[] {
+    return getArticles("articles/reviews");
+}
+
+export function getNumberOfNewsArticles(): number {
+    return fs.readdirSync("articles/news").length;
+}
+
+export function getNumberOfReviews(): number {
+    return fs.readdirSync("articles/reviews").length;
 }
