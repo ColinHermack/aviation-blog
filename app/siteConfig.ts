@@ -13,6 +13,10 @@ export const siteConfig = {
       href: "/reviews"
     },
     {
+      label: "History",
+      href: "/history"
+    },
+    {
         label: "About",
         href: "/about"
     }

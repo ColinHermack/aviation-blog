@@ -3,10 +3,11 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import {Pagination} from "@nextui-org/pagination";
-import { Card, CardHeader, CardBody } from '@nextui-org/card';
+import { Card, CardBody, CardFooter } from '@nextui-org/card';
 import { Image } from '@nextui-org/image';
 import { Link } from '@nextui-org/link';
 import { Spinner } from '@nextui-org/spinner';
+import { Divider } from "@nextui-org/divider";
 
 export default function Page() {
     const [activePage, setActivePage] = useState(1);
@@ -51,20 +52,21 @@ export default function Page() {
                             key={article.title.toLowerCase().replace(" ", "-")}
                             className='m-4'
                         >
-                            <Card className="py-4 w-[300px] flex flex-col justify-top align-center">
-                                <CardHeader className="flex-col items-start">
-                                    <h4 className="font-bold text-large">{article.title}</h4>
-                                    <p>{(new Date(article.datePosted)).toDateString()}</p>
-                                </CardHeader>
-                                <CardBody className="overflow-visible py-2 px-[15px]">
+                            <Card className="w-[350px] h-[175px] max-w-full flex flex-col justify-top align-center border-1" shadow={'none'}>
+                                <CardBody className="flex flex-row items-top justify-between overflow-visible">
+                                    <h4 className="font-bold text-md w-[200px] text-left">{article.title}</h4>
                                     <Image
                                     alt="Card background"
-                                    className="rounded-xl "
+                                    className="rounded-xl object-cover"
                                     src={`/news_images/${article.cover}`}
-                                    width={270}
-                                    height={200}
-                                    />
+                                    width={100}
+                                    height={100}
+                                    />  
                                 </CardBody>
+                                <Divider />
+                                <CardFooter>
+                                    <p className='text-tiny text-default-500 font-bold'>{(new Date(article.datePosted)).toDateString()}</p>
+                                </CardFooter>
                             </Card>
                         </Link>
                     )

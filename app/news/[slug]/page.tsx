@@ -28,7 +28,6 @@ interface PageParams {
 export default async function Page({ params }: PageParams) {
     let slug = await params.slug;
     const article: Article | undefined = getNewsArticleBySlug(slug);
-    console.log(article);
     if (article === undefined) {
         redirect("/404");
     }
@@ -36,8 +35,9 @@ export default async function Page({ params }: PageParams) {
         .use(html)
         .process(article.content)
     const articleContentHtml = articleContent.toString();
+    console.log(articleContentHtml);
     return (
-        <div className='flex flex-col items-center justify-top h-screen w-full'>
+        <div className='flex flex-col items-center justify-top min-h-screen w-full'>
             <h1 className='m-8 text-4xl font-bold text-center'>{article.metadata.title}</h1>
             <Image
                 src={`/news_images/${article.metadata.cover}`}
@@ -47,7 +47,7 @@ export default async function Page({ params }: PageParams) {
             />
             <p className='w-full text-left max-w-[800px] mx-8 mb-8 text-tiny uppercase font-bold'>PUBLISHED ON {formatDateString(article.metadata.datePosted)}</p>
             <div 
-                className='w-full text-left max-w-[800px] mx-8 mb-8 [&>p]:my-4'
+                className='w-full text-left max-w-[800px] mx-8 mb-8 [&>p]:my-4 [&>p>a]:text-sky-600'
                 dangerouslySetInnerHTML={{ __html: articleContentHtml }} 
             />
         </div>
