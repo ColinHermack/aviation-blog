@@ -52,7 +52,7 @@ export default function Page() {
                             key={article.title.toLowerCase().replace(" ", "-")}
                             className='m-4'
                         >
-                            <Card className="w-[350px] h-[175px] max-w-full flex flex-col justify-top align-center border-1" shadow={'none'}>
+                            <Card className="w-[350px] h-[175px] max-w-full flex flex-col justify-top align-center" shadow={'md'}>
                                 <CardBody className="flex flex-row items-top justify-between overflow-visible">
                                     <h4 className="font-bold text-md w-[200px] text-left">{article.title}</h4>
                                     <Image

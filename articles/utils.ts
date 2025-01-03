@@ -5,7 +5,9 @@ export interface ArticleMetadata {
     datePosted: Date,
     author: string,
     tags: string[],
-    cover: string
+    cover: string,
+    coverPhotographer: string,
+    coverLink: string
 }
 
 export interface Article {
@@ -30,7 +32,9 @@ function getArticles(dir: string): Article[] {
                 datePosted: new Date(),
                 author: "",
                 tags: [],
-                cover: ""
+                cover: "",
+                coverPhotographer: "",
+                coverLink: ""
             },
             content: ""
         };
@@ -48,6 +52,10 @@ function getArticles(dir: string): Article[] {
                 currArticle.metadata.tags = value.split(", ");
             } else if (key === "cover") {
                 currArticle.metadata.cover = value;
+            } else if (key === "cover_photographer") {
+                currArticle.metadata.coverPhotographer = value;
+            } else if (key === "cover_link") {
+                currArticle.metadata.coverLink = value;
             }
         })
 
