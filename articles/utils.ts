@@ -39,8 +39,9 @@ function getArticles(dir: string): Article[] {
             let [key, value] = line.split(": ");
             if (key === "title") {
                 currArticle.metadata.title = value;
-            } else if (key === "datePosted") {
+            } else if (key === "postedOn") {
                 currArticle.metadata.datePosted = new Date(value);
+                currArticle.metadata.datePosted.setHours(currArticle.metadata.datePosted.getHours() + 5);
             } else if (key === "author") {
                 currArticle.metadata.author = value;
             } else if (key === "tags") {
@@ -79,4 +80,8 @@ export function getNumberOfNewsArticles(): number {
 
 export function getNumberOfReviews(): number {
     return fs.readdirSync("articles/reviews").length;
+}
+
+export function getNewsArticleBySlug(slug: string): Article | undefined {
+    return getNewsArticles().find(article => article.metadata.title.toLowerCase().replaceAll(" ", "-") === slug);
 }

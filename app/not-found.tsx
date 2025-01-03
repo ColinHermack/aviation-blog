@@ -7,9 +7,9 @@ export default function NotFound() {
             <h1 className='text-4xl font-bold'>Error 404</h1>
             <h2 className='text-xl m-8'>It seems the page you're searching for doesn't exist.</h2>
             <Link
-                className="flex items-center gap-1 text-current mt-4"
-                href="https://nextui-docs-v2.vercel.app?utm_source=next-app-template"
-                title="nextui.org homepage"
+                className="flex items-center gap-1 text-current"
+                href="/"
+                title="Homepage"
               >
                 Return Home
             </Link>

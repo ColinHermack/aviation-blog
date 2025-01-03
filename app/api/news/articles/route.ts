@@ -7,7 +7,6 @@ export function GET(request: Request): Response {
         } else if (typeof request.headers.get("page") !== "string") {
             return new Response('Error: Page is not a string', {status: 400});
         } else {
-            console.log(getPaginatedArticleMetadata(parseInt(request.headers.get("page")!)));
             return new Response(JSON.stringify(getPaginatedArticleMetadata(parseInt(request.headers.get("page")!))), {status: 200});
         }
     } catch (error) {
