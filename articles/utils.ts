@@ -78,6 +78,10 @@ export function getPaginatedHistoryArticleMetadata(page: number): ArticleMetadat
     return getArticles("articles/history").slice((page - 1) * 10, page * 10).map(article => article.metadata);
 }
 
+export function getPaginatedReviewMetadata(page: number): ArticleMetadata[] {
+    return getArticles("articles/reviews").slice((page - 1) * 10, page * 10).map(article => article.metadata);
+}
+
 export function getNewsArticles(): Article[] {
     return getArticles("articles/news");
 }
@@ -104,4 +108,8 @@ export function getNewsArticleBySlug(slug: string): Article | undefined {
 
 export function getHistoryArticleBySlug(slug: string): Article | undefined {
     return getArticles("articles/history").find(article => article.metadata.title.toLowerCase().replaceAll(" ", "-") === slug);
+}
+
+export function getReviewBySlug(slug: string): Article | undefined {
+    return getReviews().find(article => article.metadata.title.toLowerCase().replaceAll(" ", "-") === slug);
 }

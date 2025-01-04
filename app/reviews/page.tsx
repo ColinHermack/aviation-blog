@@ -31,6 +31,7 @@ export default function Page() {
         })
             .then(response => response.json())
             .then(data => {
+                console.log(data);
                 setArticles(data);
             })
     }, [activePage])
@@ -48,7 +49,7 @@ export default function Page() {
                 {articles.map((article: any) => {
                     return (
                         <Link
-                            href={`/history/${article.title.toLowerCase().replaceAll(" ", "-")}`}
+                            href={`/reviews/${article.title.toLowerCase().replaceAll(" ", "-")}`}
                             key={article.title.toLowerCase().replace(" ", "-")}
                             className='m-4'
                         >
@@ -58,7 +59,7 @@ export default function Page() {
                                     <Image
                                     alt="Card background"
                                     className="rounded-xl object-cover"
-                                    src={`/history_images/${article.cover}`}
+                                    src={`/reviews_images/${article.cover}`}
                                     width={100}
                                     height={100}
                                     />  
