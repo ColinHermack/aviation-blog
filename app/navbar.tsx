@@ -13,7 +13,6 @@ import {
 import { Link } from "@nextui-org/link";
 import { Input } from "@nextui-org/input";
 import { link as linkStyles } from "@nextui-org/theme";
-import NextLink from "next/link";
 import clsx from "clsx";
 
 import { siteConfig } from "@/app/siteConfig";
@@ -72,14 +71,18 @@ export const Navbar = () => {
     <NextUINavbar maxWidth="xl" position="sticky" isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
-          <NextLink className="flex justify-start items-center gap-1" href="/">
-            <p className="font-bold text-inherit">Skybound News</p>
-          </NextLink>
+          <Link 
+            className="flex justify-start items-center gap-1 text-inherit" 
+            href="/"
+            onPress={() => setIsMenuOpen(false)}
+          >
+            <p className="font-bold text-inherit">{siteConfig.name}</p>
+          </Link>
         </NavbarBrand>
-        <ul className="hidden lg:flex gap-4 justify-start ml-2">
+        <ul className="hidden md:flex gap-4 justify-start ml-2">
           {siteConfig.navItems.map((item) => (
             <NavbarItem key={item.href}>
-              <NextLink
+              <Link
                 className={clsx(
                   linkStyles({ color: "foreground" }),
                   "data-[active=true]:text-primary data-[active=true]:font-medium",
@@ -88,7 +91,7 @@ export const Navbar = () => {
                 href={item.href}
               >
                 {item.label}
-              </NextLink>
+              </Link>
             </NavbarItem>
           ))}
         </ul>
@@ -98,11 +101,11 @@ export const Navbar = () => {
         className="hidden sm:flex basis-1/5 sm:basis-full"
         justify="end"
       >
-        <ThemeSwitch className='mr-5' />
-        <NavbarItem className="hidden lg:flex">{searchInput}</NavbarItem>
+        <ThemeSwitch className='hidden mr-5 md:flex' />
+        <NavbarItem className="hidden md:flex">{searchInput}</NavbarItem>
       </NavbarContent>
 
-      <NavbarContent className="sm:hidden basis-1 pl-4" justify="end">
+      <NavbarContent className="basis-1 pl-4 md:hidden" justify="end">
         <ThemeSwitch className='mr-5' />
         <NavbarMenuToggle />
       </NavbarContent>

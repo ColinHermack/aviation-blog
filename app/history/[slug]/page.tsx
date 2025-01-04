@@ -1,5 +1,5 @@
 import React from "react";
-import { Article, getNewsArticleBySlug } from '@/articles/utils';
+import { Article, getHistoryArticleBySlug } from '@/articles/utils';
 import { redirect } from 'next/navigation';
 import { Image } from "@nextui-org/image";
 import { Link } from "@nextui-org/link";
@@ -30,7 +30,7 @@ interface PageParams {
 
 export default async function Page({ params }: PageParams) {
     let slug = await params.slug;
-    const article: Article | undefined = getNewsArticleBySlug(slug);
+    const article: Article | undefined = getHistoryArticleBySlug(slug);
     if (article === undefined) {
         redirect("/404");
     }
@@ -42,7 +42,7 @@ export default async function Page({ params }: PageParams) {
         <div className='flex flex-col items-center justify-top min-h-screen w-full'>
             <h1 className='m-8 text-4xl font-bold text-center'>{article.metadata.title}</h1>
             <Image
-                src={`/news_images/${article.metadata.cover}`}
+                src={`/history_images/${article.metadata.cover}`}
                 width={800}
                 alt={article.metadata.title}
                 className='mt-8'

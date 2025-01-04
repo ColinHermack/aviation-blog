@@ -1,9 +1,9 @@
-import { title, subtitle } from "@/app/primitives";
+import { siteConfig } from "@/app/siteConfig"
 
 export default function Home() {
   return (
     <>
-      <h1 className='text-4xl font-bold text-center'>Skybound News</h1>
+      <h1 className='text-4xl font-bold text-center'>{siteConfig.name}</h1>
     </>
   );
 }

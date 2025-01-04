@@ -1,4 +1,4 @@
-import { ArticleMetadata, getPaginatedNewsArticleMetadata } from "@/articles/utils";
+import { ArticleMetadata, getPaginatedHistoryArticleMetadata } from "@/articles/utils";
 
 export function GET(request: Request): Response {
     try {
@@ -7,7 +7,7 @@ export function GET(request: Request): Response {
         } else if (typeof request.headers.get("page") !== "string") {
             return new Response('Error: Page is not a string', {status: 400});
         } else {
-            return new Response(JSON.stringify(getPaginatedNewsArticleMetadata(parseInt(request.headers.get("page")!))), {status: 200});
+            return new Response(JSON.stringify(getPaginatedHistoryArticleMetadata(parseInt(request.headers.get("page")!))), {status: 200});
         }
     } catch (error) {
         return new Response('Error', {status: 500});

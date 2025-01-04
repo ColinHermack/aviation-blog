@@ -70,8 +70,12 @@ function getArticles(dir: string): Article[] {
     return articles;
 }
 
-export function getPaginatedArticleMetadata(page: number): ArticleMetadata[] {
+export function getPaginatedNewsArticleMetadata(page: number): ArticleMetadata[] {
     return getArticles("articles/news").slice((page - 1) * 10, page * 10).map(article => article.metadata);
+}
+
+export function getPaginatedHistoryArticleMetadata(page: number): ArticleMetadata[] {
+    return getArticles("articles/history").slice((page - 1) * 10, page * 10).map(article => article.metadata);
 }
 
 export function getNewsArticles(): Article[] {
@@ -86,10 +90,18 @@ export function getNumberOfNewsArticles(): number {
     return fs.readdirSync("articles/news").length;
 }
 
+export function getNumberOfHistoryArticles(): number {
+    return fs.readdirSync("articles/history").length;
+}
+
 export function getNumberOfReviews(): number {
     return fs.readdirSync("articles/reviews").length;
 }
 
 export function getNewsArticleBySlug(slug: string): Article | undefined {
     return getNewsArticles().find(article => article.metadata.title.toLowerCase().replaceAll(" ", "-") === slug);
+}
+
+export function getHistoryArticleBySlug(slug: string): Article | undefined {
+    return getArticles("articles/history").find(article => article.metadata.title.toLowerCase().replaceAll(" ", "-") === slug);
 }

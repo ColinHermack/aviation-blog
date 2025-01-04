@@ -1,7 +1,7 @@
 export type SiteConfig = typeof siteConfig;
 
 export const siteConfig = {
-  name: "Skybound News",
+  name: "Sky High Aviation",
   description: "News and travel reviews from the commercial aviation world.",
   navItems: [
     {
