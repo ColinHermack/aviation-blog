@@ -6,20 +6,20 @@ export const siteConfig = {
   navItems: [
     {
       label: "News",
-      href: "/news"
+      href: "/news",
     },
     {
       label: "Reviews",
-      href: "/reviews"
+      href: "/reviews",
     },
     {
       label: "History",
-      href: "/history"
+      href: "/history",
     },
     {
-        label: "About",
-        href: "/about"
-    }
+      label: "About",
+      href: "/about",
+    },
   ],
   links: {
     github: "https://github.com/nextui-org/nextui",

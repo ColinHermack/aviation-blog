@@ -11,12 +11,14 @@ import {
   NavbarMenuItem,
 } from "@nextui-org/navbar";
 import { Link } from "@nextui-org/link";
-import { Input } from "@nextui-org/input";
 import { link as linkStyles } from "@nextui-org/theme";
 import clsx from "clsx";
+import { useRouter } from "next/navigation";
+
+import { Form } from "@nextui-org/form";
+import { Input } from "@nextui-org/input";
 
 import { siteConfig } from "@/app/siteConfig";
-
 import { IconSvgProps } from "@/types";
 import { ThemeSwitch } from "@/app/theme-switch";
 
@@ -49,30 +51,47 @@ const SearchIcon = (props: IconSvgProps) => (
 );
 
 export const Navbar = () => {
-  const searchInput = (
-    <Input
-      aria-label="Search"
-      classNames={{
-        inputWrapper: "bg-default-100",
-        input: "text-sm",
-      }}
-      labelPlacement="outside"
-      placeholder="Search..."
-      startContent={
-        <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
-      }
-      type="search"
-    />
-  );
-
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
+  const searchInput = (
+    <Form onSubmit={(e) => {
+      e.preventDefault();
+      const searchTerm: FormDataEntryValue | null = new FormData(e.currentTarget).get("search");
+      if (searchTerm === null) {
+        return;
+      }
+      router.push(`/search/${String(searchTerm).toLowerCase().replaceAll(" ", "-")}`);
+      setIsMenuOpen(false);
+    }}>
+      <Input
+        aria-label="Search"
+        classNames={{
+          inputWrapper: "bg-default-100",
+          input: "text-sm",
+        }}
+        labelPlacement="outside"
+        placeholder="Search..."
+        name="search"
+        startContent={
+          <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
+        }
+        type="search"
+      />
+    </Form>
+  )
+
   return (
-    <NextUINavbar maxWidth="xl" position="sticky" isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
+    <NextUINavbar
+      isMenuOpen={isMenuOpen}
+      maxWidth="xl"
+      position="sticky"
+      onMenuOpenChange={setIsMenuOpen}
+    >
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
-          <Link 
-            className="flex justify-start items-center gap-1 text-inherit" 
+          <Link
+            className="flex justify-start items-center gap-1 text-inherit"
             href="/"
             onPress={() => setIsMenuOpen(false)}
           >
@@ -101,22 +120,22 @@ export const Navbar = () => {
         className="hidden sm:flex basis-1/5 sm:basis-full"
         justify="end"
       >
-        <ThemeSwitch className='hidden mr-5 md:flex' />
+        <ThemeSwitch className="hidden mr-5 md:flex" />
         <NavbarItem className="hidden md:flex">{searchInput}</NavbarItem>
       </NavbarContent>
 
       <NavbarContent className="basis-1 pl-4 md:hidden" justify="end">
-        <ThemeSwitch className='mr-5' />
+        <ThemeSwitch className="mr-5" />
         <NavbarMenuToggle />
       </NavbarContent>
 
       <NavbarMenu>
         {searchInput}
-        <div className="mx-4 mt-2 flex flex-col gap-2">
+        <div className="mx-4 mt-2 flex flex-col">
           {siteConfig.navItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
               <Link
-                className='text-inherit'
+                className="text-inherit font-bold text-2xl my-3"
                 href={item.href}
                 size="lg"
                 onPress={() => setIsMenuOpen(false)}
