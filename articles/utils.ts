@@ -1,5 +1,7 @@
 import * as fs from "fs";
 
+const NUM_ARTICLES_PER_PAGE = 12;
+
 export interface ArticleMetadata {
   title: string;
   datePosted: Date;
@@ -8,6 +10,7 @@ export interface ArticleMetadata {
   cover: string;
   coverPhotographer: string;
   coverLink: string;
+  type: string;
 }
 
 export interface Article {
@@ -36,6 +39,7 @@ function getArticles(dir: string): Article[] {
         cover: "",
         coverPhotographer: "",
         coverLink: "",
+        type: ""
       },
       content: "",
     };
@@ -77,34 +81,70 @@ function getArticles(dir: string): Article[] {
   return articles;
 }
 
-export function getPaginatedNewsArticleMetadata(
-  page: number,
-): ArticleMetadata[] {
-  return getArticles("articles/news")
-    .slice((page - 1) * 10, page * 10)
+export function getPaginatedNewsArticleMetadata(page: number): ArticleMetadata[] {
+  let articles = getArticles("articles/news");
+
+  articles.forEach((article) => {
+    article.metadata.type = "news";
+  });
+
+  return articles
+    .slice((page - 1) * NUM_ARTICLES_PER_PAGE, page * NUM_ARTICLES_PER_PAGE)
     .map((article) => article.metadata);
 }
 
-export function getPaginatedHistoryArticleMetadata(
-  page: number,
-): ArticleMetadata[] {
-  return getArticles("articles/history")
-    .slice((page - 1) * 10, page * 10)
+export function getPaginatedHistoryArticleMetadata(page: number): ArticleMetadata[] {
+  let articles = getArticles("articles/history");
+
+  articles.forEach((article) => {
+    article.metadata.type = "history";
+  });
+
+  return articles
+    .slice((page - 1) * NUM_ARTICLES_PER_PAGE, page * NUM_ARTICLES_PER_PAGE)
     .map((article) => article.metadata);
 }
 
 export function getPaginatedReviewMetadata(page: number): ArticleMetadata[] {
-  return getArticles("articles/reviews")
-    .slice((page - 1) * 10, page * 10)
+  let articles = getArticles("articles/reviews");
+
+  articles.forEach((article) => {
+    article.metadata.type = "reviews";
+  });
+
+  return articles
+    .slice((page - 1) * NUM_ARTICLES_PER_PAGE, page * NUM_ARTICLES_PER_PAGE)
     .map((article) => article.metadata);
 }
 
 export function getNewsArticles(): Article[] {
-  return getArticles("articles/news");
+  let articles = getArticles("articles/news");
+
+  articles.forEach((article) => {
+    article.metadata.type = "news";
+  });
+
+  return articles;
 }
 
 export function getReviews(): Article[] {
-  return getArticles("articles/reviews");
+  let articles = getArticles("articles/reviews");
+
+  articles.forEach((article) => {
+    article.metadata.type = "reviews";
+  });
+
+  return articles;
+}
+
+export function getHistoryArticles(): Article[] {
+  let articles = getArticles("articles/history");
+
+  articles.forEach((article) => {
+    article.metadata.type = "history";
+  });
+
+  return articles;
 }
 
 export function getNumberOfNewsArticles(): number {
@@ -127,7 +167,7 @@ export function getNewsArticleBySlug(slug: string): Article | undefined {
 }
 
 export function getHistoryArticleBySlug(slug: string): Article | undefined {
-  return getArticles("articles/history").find(
+  return getHistoryArticles().find(
     (article) =>
       article.metadata.title.toLowerCase().replaceAll(" ", "-") === slug,
   );
@@ -138,4 +178,31 @@ export function getReviewBySlug(slug: string): Article | undefined {
     (article) =>
       article.metadata.title.toLowerCase().replaceAll(" ", "-") === slug,
   );
+}
+
+export function getSearchResults(searchTerm: string): ArticleMetadata[] {
+  const articles = [
+    ...getNewsArticles(),
+    ...getHistoryArticles(),
+    ...getReviews()
+  ].sort((a, b) => {
+    return b.metadata.datePosted.getTime() - a.metadata.datePosted.getTime();
+  });
+
+  searchTerm = searchTerm.replaceAll("-", " ");
+
+  const results = articles.filter((article) => {
+    return (
+      article.metadata.title.toLowerCase().includes(searchTerm.toLowerCase())
+      || article.metadata.author.toLowerCase().includes(searchTerm.toLowerCase())
+      || article.metadata.tags.find((tag) => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+      || article.content.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  })
+
+  if (results.length === 0) {
+    return articles.slice(0, NUM_ARTICLES_PER_PAGE).map((article) => article.metadata);
+  }
+
+  return results.map((article) => article.metadata).slice(0, NUM_ARTICLES_PER_PAGE);
 }

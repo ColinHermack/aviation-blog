@@ -36,7 +36,7 @@ export default function Page() {
   }, [activePage]);
 
   if (articles.length === 0) {
-    return <Spinner />;
+    return <Spinner color="primary" size="lg" />;
   }
 
   return (

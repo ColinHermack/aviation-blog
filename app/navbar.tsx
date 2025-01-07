@@ -22,7 +22,7 @@ import { siteConfig } from "@/app/siteConfig";
 import { IconSvgProps } from "@/types";
 import { ThemeSwitch } from "@/app/theme-switch";
 
-const SearchIcon = (props: IconSvgProps) => (
+export const SearchIcon = (props: IconSvgProps) => (
   <svg
     aria-hidden="true"
     fill="none"
@@ -61,7 +61,7 @@ export const Navbar = () => {
       if (searchTerm === null) {
         return;
       }
-      router.push(`/search/${String(searchTerm).toLowerCase().replaceAll(" ", "-")}`);
+      router.push(`/search?query=${String(searchTerm).toLowerCase().replaceAll(" ", "-")}`);
       setIsMenuOpen(false);
     }}>
       <Input
