@@ -22,6 +22,8 @@ import { siteConfig } from "@/app/siteConfig";
 import { IconSvgProps } from "@/types";
 import { ThemeSwitch } from "@/app/theme-switch";
 
+import { FaPlaneDeparture } from "react-icons/fa";
+
 export const SearchIcon = (props: IconSvgProps) => (
   <svg
     aria-hidden="true"
@@ -95,7 +97,8 @@ export const Navbar = () => {
             href="/"
             onPress={() => setIsMenuOpen(false)}
           >
-            <p className="font-bold text-inherit">{siteConfig.name}</p>
+            <FaPlaneDeparture />
+            <p className="font-bold text-inherit ml-4">{siteConfig.name}</p>
           </Link>
         </NavbarBrand>
         <ul className="hidden md:flex gap-4 justify-start ml-2">

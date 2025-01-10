@@ -53,6 +53,7 @@ interface PageParams {
 
 export default async function Page({ params }: PageParams) {
   let slug = await params.slug;
+  console.log(slug);
   const article: Article | undefined = getNewsArticleBySlug(slug);
 
   if (article === undefined) {

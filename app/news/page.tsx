@@ -9,6 +9,8 @@ import { Link } from "@nextui-org/link";
 import { Spinner } from "@nextui-org/spinner";
 import { Divider } from "@nextui-org/divider";
 
+import ArticleCard from "@/app/article-card";
+
 export default function Page() {
   const [activePage, setActivePage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
@@ -45,35 +47,13 @@ export default function Page() {
       <div className="flex flex-wrap justify-center items-center">
         {articles.map((article: any) => {
           return (
-            <Link
+            <ArticleCard
+              title={article.title}
+              coverPhoto={article.cover}
+              datePosted={new Date(article.datePosted)}
               key={article.title.toLowerCase().replace(" ", "-")}
-              className="m-4"
-              href={`/news/${article.title.toLowerCase().replaceAll(" ", "-")}`}
-            >
-              <Card
-                className="w-[350px] h-[175px] max-w-full flex flex-col justify-top align-center"
-                shadow={"md"}
-              >
-                <CardBody className="flex flex-row items-top justify-between overflow-visible">
-                  <h4 className="font-bold text-md w-[200px] text-left">
-                    {article.title}
-                  </h4>
-                  <Image
-                    alt="Card background"
-                    className="rounded-xl object-cover"
-                    height={100}
-                    src={`/news_images/${article.cover}`}
-                    width={100}
-                  />
-                </CardBody>
-                <Divider />
-                <CardFooter>
-                  <p className="text-tiny text-default-500 font-bold">
-                    {new Date(article.datePosted).toDateString()}
-                  </p>
-                </CardFooter>
-              </Card>
-            </Link>
+              type={article.type}
+            />
           );
         })}
       </div>
