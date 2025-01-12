@@ -14,15 +14,13 @@ import { Link } from "@nextui-org/link";
 import { link as linkStyles } from "@nextui-org/theme";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
-
 import { Form } from "@nextui-org/form";
 import { Input } from "@nextui-org/input";
+import { FaPlaneDeparture } from "react-icons/fa";
 
 import { siteConfig } from "@/app/siteConfig";
 import { IconSvgProps } from "@/types";
 import { ThemeSwitch } from "@/app/theme-switch";
-
-import { FaPlaneDeparture } from "react-icons/fa";
 
 export const SearchIcon = (props: IconSvgProps) => (
   <svg
@@ -57,15 +55,22 @@ export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
   const searchInput = (
-    <Form onSubmit={(e) => {
-      e.preventDefault();
-      const searchTerm: FormDataEntryValue | null = new FormData(e.currentTarget).get("search");
-      if (searchTerm === null) {
-        return;
-      }
-      router.push(`/search?query=${String(searchTerm).toLowerCase().replaceAll(" ", "-")}`);
-      setIsMenuOpen(false);
-    }}>
+    <Form
+      onSubmit={(e) => {
+        e.preventDefault();
+        const searchTerm: FormDataEntryValue | null = new FormData(
+          e.currentTarget,
+        ).get("search");
+
+        if (searchTerm === null) {
+          return;
+        }
+        router.push(
+          `/search?query=${String(searchTerm).toLowerCase().replaceAll(" ", "-")}`,
+        );
+        setIsMenuOpen(false);
+      }}
+    >
       <Input
         aria-label="Search"
         classNames={{
@@ -73,15 +78,15 @@ export const Navbar = () => {
           input: "text-sm",
         }}
         labelPlacement="outside"
-        placeholder="Search..."
         name="search"
+        placeholder="Search..."
         startContent={
           <SearchIcon className="text-base text-default-400 pointer-events-none flex-shrink-0" />
         }
         type="search"
       />
     </Form>
-  )
+  );
 
   return (
     <NextUINavbar

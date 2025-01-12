@@ -64,6 +64,7 @@ export default async function Page({ params }: PageParams) {
   const articleContentHtml = articleContent.toString();
 
   console.log(articleContentHtml);
+
   return (
     <div className="flex flex-col items-center justify-top min-h-screen w-full">
       <h1 className="m-8 text-4xl font-bold text-center">
@@ -75,15 +76,19 @@ export default async function Page({ params }: PageParams) {
         src={`/reviews_images/${article.metadata.cover}`}
         width={800}
       />
-      <Link
+      {
+        article.metadata.coverLink !== "" && article.metadata.coverPhotographer !== "" ? 
+        (<Link
         className="w-full text-tiny uppercase font-bold flex justify-left items-center max-w-[800px] gap-2 mb-4 mt-2 text-sky-600"
         href={article.metadata.coverLink}
         isExternal={true}
-      >
-        <FaCamera />
-        {article.metadata.coverPhotographer}
-      </Link>
-      <p className="w-full text-left max-w-[800px] mx-8 mb-8 text-tiny uppercase font-bold">
+        >
+          <FaCamera />
+          {article.metadata.coverPhotographer}
+        </Link>)
+        : <></>
+      }
+      <p className="w-full text-left max-w-[800px] mb-8 mt-2 text-tiny uppercase font-bold">
         PUBLISHED ON {formatDateString(article.metadata.datePosted)}
       </p>
       <div

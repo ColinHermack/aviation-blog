@@ -3,11 +3,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Pagination } from "@nextui-org/pagination";
-import { Card, CardBody, CardFooter } from "@nextui-org/card";
-import { Image } from "@nextui-org/image";
-import { Link } from "@nextui-org/link";
 import { Spinner } from "@nextui-org/spinner";
-import { Divider } from "@nextui-org/divider";
 
 import ArticleCard from "@/app/article-card";
 
@@ -48,10 +44,10 @@ export default function Page() {
         {articles.map((article: any) => {
           return (
             <ArticleCard
-              title={article.title}
+              key={article.title.toLowerCase().replace(" ", "-")}
               coverPhoto={article.cover}
               datePosted={new Date(article.datePosted)}
-              key={article.title.toLowerCase().replace(" ", "-")}
+              title={article.title}
               type={article.type}
             />
           );

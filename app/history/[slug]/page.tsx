@@ -72,15 +72,19 @@ export default async function Page({ params }: PageParams) {
         src={`/history_images/${article.metadata.cover}`}
         width={800}
       />
-      <Link
+      {
+        article.metadata.coverLink !== "" && article.metadata.coverPhotographer !== "" ? 
+        (<Link
         className="w-full text-tiny uppercase font-bold flex justify-left items-center max-w-[800px] gap-2 mb-4 mt-2 text-sky-600"
         href={article.metadata.coverLink}
         isExternal={true}
-      >
-        <FaCamera />
-        {article.metadata.coverPhotographer}
-      </Link>
-      <p className="w-full text-left max-w-[800px] mx-8 mb-8 text-tiny uppercase font-bold">
+        >
+          <FaCamera />
+          {article.metadata.coverPhotographer}
+        </Link>)
+        : <></>
+      }
+      <p className="w-full text-left max-w-[800px] mx-8 mb-8 mt-2 text-tiny uppercase font-bold">
         PUBLISHED ON {formatDateString(article.metadata.datePosted)}
       </p>
       <div

@@ -15,6 +15,6 @@ export const siteConfig = {
     {
       label: "History",
       href: "/history",
-    }
-  ]
+    },
+  ],
 };

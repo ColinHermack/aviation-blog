@@ -39,7 +39,7 @@ function getArticles(dir: string): Article[] {
         cover: "",
         coverPhotographer: "",
         coverLink: "",
-        type: ""
+        type: "",
       },
       content: "",
     };
@@ -81,7 +81,9 @@ function getArticles(dir: string): Article[] {
   return articles;
 }
 
-export function getPaginatedNewsArticleMetadata(page: number): ArticleMetadata[] {
+export function getPaginatedNewsArticleMetadata(
+  page: number,
+): ArticleMetadata[] {
   let articles = getArticles("articles/news");
 
   articles.forEach((article) => {
@@ -93,7 +95,9 @@ export function getPaginatedNewsArticleMetadata(page: number): ArticleMetadata[]
     .map((article) => article.metadata);
 }
 
-export function getPaginatedHistoryArticleMetadata(page: number): ArticleMetadata[] {
+export function getPaginatedHistoryArticleMetadata(
+  page: number,
+): ArticleMetadata[] {
   let articles = getArticles("articles/history");
 
   articles.forEach((article) => {
@@ -184,7 +188,7 @@ export function getSearchResults(searchTerm: string): ArticleMetadata[] {
   const articles = [
     ...getNewsArticles(),
     ...getHistoryArticles(),
-    ...getReviews()
+    ...getReviews(),
   ].sort((a, b) => {
     return b.metadata.datePosted.getTime() - a.metadata.datePosted.getTime();
   });
@@ -193,16 +197,24 @@ export function getSearchResults(searchTerm: string): ArticleMetadata[] {
 
   const results = articles.filter((article) => {
     return (
-      article.metadata.title.toLowerCase().includes(searchTerm.toLowerCase())
-      || article.metadata.author.toLowerCase().includes(searchTerm.toLowerCase())
-      || article.metadata.tags.find((tag) => tag.toLowerCase().includes(searchTerm.toLowerCase()))
-      || article.content.toLowerCase().includes(searchTerm.toLowerCase())
+      article.metadata.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      article.metadata.author
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase()) ||
+      article.metadata.tags.find((tag) =>
+        tag.toLowerCase().includes(searchTerm.toLowerCase()),
+      ) ||
+      article.content.toLowerCase().includes(searchTerm.toLowerCase())
     );
-  })
+  });
 
   if (results.length === 0) {
-    return articles.slice(0, NUM_ARTICLES_PER_PAGE).map((article) => article.metadata);
+    return articles
+      .slice(0, NUM_ARTICLES_PER_PAGE)
+      .map((article) => article.metadata);
   }
 
-  return results.map((article) => article.metadata).slice(0, NUM_ARTICLES_PER_PAGE);
+  return results
+    .map((article) => article.metadata)
+    .slice(0, NUM_ARTICLES_PER_PAGE);
 }

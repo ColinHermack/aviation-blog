@@ -44,10 +44,10 @@ export default function Page() {
         {articles.map((article: any) => {
           return (
             <ArticleCard
-              title={article.title}
+              key={article.title.toLowerCase().replace(" ", "-")}
               coverPhoto={article.cover}
               datePosted={new Date(article.datePosted)}
-              key={article.title.toLowerCase().replace(" ", "-")}
+              title={article.title}
               type={article.type}
             />
           );
