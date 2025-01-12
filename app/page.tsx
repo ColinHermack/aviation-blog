@@ -4,9 +4,9 @@ import { Card, CardFooter } from "@nextui-org/card";
 import { Link } from "@nextui-org/link";
 
 import ArticleCard from "@/app/article-card";
-import { ArticleMetadata, getPaginatedNewsArticleMetadata } from "@/articles/utils";
+import { ArticleMetadata, getPaginatedNewsArticleMetadata} from "@/articles/utils";
 
-function LatestNews() {
+function LatestArticles() {
   let latestArticles: ArticleMetadata[] = getPaginatedNewsArticleMetadata(1).slice(0, 3);
   return (
     latestArticles.map((article) => {
@@ -90,8 +90,8 @@ export default function Home() {
         </Link>
       </div>
 
-      <h2 className='text-2xl font-bold mb-5'>Latest News</h2>
-      <LatestNews />
+      <h2 className='text-2xl font-bold mb-5'>Latest Articles</h2>
+      <LatestArticles />
     </div>
   );
 }

@@ -17,7 +17,7 @@ export default function ArticleCard(props: ArticleCardProps) {
         <Link
           key={props.title.toLowerCase().replace(" ", "-")}
           className="m-4"
-          href={`/news/${props.title.toLowerCase().replaceAll(" ", "-")}`}
+          href={`/${props.type}/${props.title.toLowerCase().replaceAll(" ", "-")}`}
         >
           <Card
             className="w-[350px] h-[175px] max-w-full flex flex-col justify-top align-center"

@@ -86,7 +86,7 @@ export default async function Page({ params }: PageParams) {
       </p>
       <div
         dangerouslySetInnerHTML={{ __html: articleContentHtml }}
-        className="w-full text-left max-w-[800px] mx-8 mb-8 [&>p]:my-4 [&>p>a]:text-sky-600"
+        className="w-full text-left max-w-[800px] mx-8 mb-8 [&>p]:my-4 [&>p>a]:text-sky-600 [&>h2]:font-bold [&>h2]:my-4 [&>h2]:text-2xl [&>h3]:font-bold [&>h3]:my-4 [&>h3]:text-xl [&>h4]:font-bold [&>h4]:my-4 [&>h4]:text-lg [&>h5]:font-bold [&>h5]:my-4 [&>h5]:text-base [&>h6]:font-bold [&>h6]:my-4 [&>h6]:text-sm"
       />
     </div>
   );

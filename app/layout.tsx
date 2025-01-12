@@ -51,12 +51,24 @@ export default function RootLayout({
               {children}
             </main>
             <footer className="w-full flex flex-col items-center justify-top py-10">
+              <FaPlaneDeparture className='text-5xl my-5'/>
+              <div className="flex flex-col justify-top items-center gap-4 md:flex-row md:justify-center my-5">
+                {siteConfig.navItems.map((item) => {
+                  return (
+                    <Link 
+                      key={item.href}
+                      href={item.href}
+                    >
+                      {item.label}
+                    </Link>
+                  )
+                })}
+              </div>
               <Link 
               href='https://github.com/ColinHermack/aviation-blog/blob/main/LICENSE'
               >
                 MIT Licensed
               </Link>
-              <FaPlaneDeparture className='text-5xl my-10'/>
             </footer>
           </div>
         </Providers>
