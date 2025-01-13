@@ -11,6 +11,9 @@ import { siteConfig } from "@/app/siteConfig";
 import { fontSans } from "@/app/fonts";
 import { Navbar } from "@/app/navbar";
 
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next"
+
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
@@ -43,6 +46,8 @@ export default function RootLayout({
           fontSans.variable,
         )}
       >
+        <Analytics />
+        <SpeedInsights />
         <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
           <div className="relative flex flex-col h-screen text-foreground bg-background">
             <Navbar />
