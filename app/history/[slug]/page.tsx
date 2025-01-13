@@ -45,14 +45,12 @@ function formatDateString(date: Date): string {
   return dateString;
 }
 
-interface PageParams {
-  params: {
-    slug: string;
-  };
-}
-
-export default async function Page({ params }: PageParams) {
-  let slug = await params.slug;
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  let slug = (await params).slug;
   const article: Article | undefined = getHistoryArticleBySlug(slug);
 
   if (article === undefined) {
@@ -72,18 +70,19 @@ export default async function Page({ params }: PageParams) {
         src={`/history_images/${article.metadata.cover}`}
         width={800}
       />
-      {
-        article.metadata.coverLink !== "" && article.metadata.coverPhotographer !== "" ? 
-        (<Link
-        className="w-full text-tiny uppercase font-bold flex justify-left items-center max-w-[800px] gap-2 mb-4 mt-2 text-sky-600"
-        href={article.metadata.coverLink}
-        isExternal={true}
+      {article.metadata.coverLink !== "" &&
+      article.metadata.coverPhotographer !== "" ? (
+        <Link
+          className="w-full text-tiny uppercase font-bold flex justify-left items-center max-w-[800px] gap-2 mb-4 mt-2 text-sky-600"
+          href={article.metadata.coverLink}
+          isExternal={true}
         >
           <FaCamera />
           {article.metadata.coverPhotographer}
-        </Link>)
-        : <></>
-      }
+        </Link>
+      ) : (
+        <></>
+      )}
       <p className="w-full text-left max-w-[800px] mx-8 mb-8 mt-2 text-tiny uppercase font-bold">
         PUBLISHED ON {formatDateString(article.metadata.datePosted)}
       </p>

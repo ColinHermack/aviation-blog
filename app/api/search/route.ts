@@ -14,7 +14,7 @@ export function GET(request: Request): Response {
         { status: 200 },
       );
     }
-  } catch (error) {
+  } catch {
     return new Response("Error", { status: 500 });
   }
 }

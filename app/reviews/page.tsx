@@ -29,7 +29,6 @@ export default function Page() {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setArticles(data);
       });
   }, [activePage]);
