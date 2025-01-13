@@ -84,7 +84,7 @@ function getArticles(dir: string): Article[] {
 export function getPaginatedNewsArticleMetadata(
   page: number,
 ): ArticleMetadata[] {
-  let articles = getArticles("articles/news");
+  let articles = getArticles("/articles/news");
 
   articles.forEach((article) => {
     article.metadata.type = "news";
@@ -98,7 +98,7 @@ export function getPaginatedNewsArticleMetadata(
 export function getPaginatedHistoryArticleMetadata(
   page: number,
 ): ArticleMetadata[] {
-  let articles = getArticles("articles/history");
+  let articles = getArticles("/articles/history");
 
   articles.forEach((article) => {
     article.metadata.type = "history";
@@ -110,7 +110,7 @@ export function getPaginatedHistoryArticleMetadata(
 }
 
 export function getPaginatedReviewMetadata(page: number): ArticleMetadata[] {
-  let articles = getArticles("articles/reviews");
+  let articles = getArticles("/articles/reviews");
 
   articles.forEach((article) => {
     article.metadata.type = "reviews";
@@ -122,7 +122,7 @@ export function getPaginatedReviewMetadata(page: number): ArticleMetadata[] {
 }
 
 export function getNewsArticles(): Article[] {
-  let articles = getArticles("articles/news");
+  let articles = getArticles("/articles/news");
 
   articles.forEach((article) => {
     article.metadata.type = "news";
@@ -132,7 +132,7 @@ export function getNewsArticles(): Article[] {
 }
 
 export function getReviews(): Article[] {
-  let articles = getArticles("articles/reviews");
+  let articles = getArticles("/articles/reviews");
 
   articles.forEach((article) => {
     article.metadata.type = "reviews";
@@ -142,7 +142,7 @@ export function getReviews(): Article[] {
 }
 
 export function getHistoryArticles(): Article[] {
-  let articles = getArticles("articles/history");
+  let articles = getArticles("/articles/history");
 
   articles.forEach((article) => {
     article.metadata.type = "history";
@@ -152,15 +152,15 @@ export function getHistoryArticles(): Article[] {
 }
 
 export function getNumberOfNewsArticles(): number {
-  return fs.readdirSync("articles/news").length;
+  return fs.readdirSync("/articles/news").length;
 }
 
 export function getNumberOfHistoryArticles(): number {
-  return fs.readdirSync("articles/history").length;
+  return fs.readdirSync("/articles/history").length;
 }
 
 export function getNumberOfReviews(): number {
-  return fs.readdirSync("articles/reviews").length;
+  return fs.readdirSync("/articles/reviews").length;
 }
 
 export function getNewsArticleBySlug(slug: string): Article | undefined {
