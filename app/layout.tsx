@@ -3,7 +3,6 @@ import { Metadata, Viewport } from "next";
 import { Link } from "@nextui-org/link";
 import clsx from "clsx";
 import { GeistSans } from "geist/font/sans";
-import { FaPlaneDeparture } from "react-icons/fa";
 
 import { Providers } from "./providers";
 
@@ -13,6 +12,8 @@ import { Navbar } from "@/app/navbar";
 
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next"
+
+import Logo from '@/app/logo';
 
 export const metadata: Metadata = {
   title: {
@@ -55,7 +56,7 @@ export default function RootLayout({
               {children}
             </main>
             <footer className="w-full flex flex-col items-center justify-top py-10">
-              <FaPlaneDeparture className="text-5xl my-5" />
+              <Logo size={60} />
               <div className="flex flex-col justify-top items-center gap-4 md:flex-row md:justify-center my-5">
                 {siteConfig.navItems.map((item) => {
                   return (
