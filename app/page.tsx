@@ -38,8 +38,7 @@ export default function Home() {
         width={800}
       />
       <p className="text-center text-xl font-bold">
-        This is a site featuring news, reviews, and intersting history regarding
-        commercial aviation.
+        A site about commercial aviation and global travel.
       </p>
 
       <div className="my-10 flex flex-col justify-top align-center gap-8 md:flex-row md:justify-center md:items-center">
