@@ -13,6 +13,8 @@ import { fontSans } from "@/app/fonts";
 import { Navbar } from "@/app/navbar";
 import Logo from "@/app/logo";
 
+import { FaXTwitter } from 'react-icons/fa6';
+
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
@@ -54,19 +56,16 @@ export default function RootLayout({
               {children}
             </main>
             <footer className="w-full flex flex-col items-center justify-top py-10">
-              <Logo size={60} />
-              <div className="flex flex-col justify-top items-center gap-4 md:flex-row md:justify-center my-5">
-                {siteConfig.navItems.map((item) => {
-                  return (
-                    <Link key={item.href} href={item.href}>
-                      {item.label}
-                    </Link>
-                  );
-                })}
-              </div>
-              <Link href="https://github.com/ColinHermack/aviation-blog/blob/main/LICENSE">
-                MIT Licensed
+              <Link
+                href='/'
+              >
+                <Logo size={60} />
               </Link>
+              <div className='flex justify-center items-center my-10'>
+                <Link href='https://x.com/TheAirTravelGuy' className='text-inherit'>
+                  <FaXTwitter size={30} />
+                </Link>
+              </div>
             </footer>
           </div>
         </Providers>
