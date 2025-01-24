@@ -6,7 +6,7 @@ import { remark } from "remark";
 import html from "remark-html";
 import { FaCamera } from "react-icons/fa";
 
-import { Article, getNewsArticleBySlug } from "@/articles/utils";
+import { Article, getArticleBySlug } from "@/articles/utils";
 
 function formatDateString(date: Date): string {
   const days = [
@@ -51,7 +51,7 @@ export default async function Page({
   params: Promise<{ slug: string }>;
 }) {
   let slug = (await params).slug;
-  const article: Article | undefined = getNewsArticleBySlug(slug);
+  const article: Article | undefined = getArticleBySlug(slug);
 
   if (article === undefined) {
     redirect("/404");
@@ -67,7 +67,7 @@ export default async function Page({
       <Image
         alt={article.metadata.title}
         className="mt-8"
-        src={`/news_images/${article.metadata.cover}`}
+        src={`/article_images/${article.metadata.cover}`}
         width={800}
       />
       {article.metadata.coverLink !== "" &&

@@ -8,6 +8,7 @@ export interface ArticleMetadata {
   datePosted: Date;
   author: string;
   tags: string[];
+  topic: string;
   cover: string;
   coverPhotographer: string;
   coverLink: string;
@@ -37,6 +38,7 @@ function getArticles(dir: string): Article[] {
         datePosted: new Date(),
         author: "",
         tags: [],
+        topic: "",
         cover: "",
         coverPhotographer: "",
         coverLink: "",
@@ -62,6 +64,8 @@ function getArticles(dir: string): Article[] {
           currArticle.metadata.author = value;
         } else if (key === "tags") {
           currArticle.metadata.tags = value.split(", ");
+        } else if (key === "topic") {
+          currArticle.metadata.topic = value;
         } else if (key === "cover") {
           currArticle.metadata.cover = value;
         } else if (key === "cover_photographer") {
@@ -82,117 +86,100 @@ function getArticles(dir: string): Article[] {
   return articles;
 }
 
-export function getPaginatedNewsArticleMetadata(
-  page: number,
-): ArticleMetadata[] {
-  let articles = getArticles(path.join(process.cwd(), 'articles', 'news'));
+export function getArticlesByTopic(topic: string): ArticleMetadata[] {
+  const frontmatterRegex = /---\s*([\s\S]*?)\s*---/;
 
-  articles.forEach((article) => {
-    article.metadata.type = "news";
-  });
+  let articles: ArticleMetadata[] = [];
+  let files = fs.readdirSync(path.join(process.cwd(), "articles", "text"));
 
-  return articles
-    .slice((page - 1) * NUM_ARTICLES_PER_PAGE, page * NUM_ARTICLES_PER_PAGE)
-    .map((article) => article.metadata);
-}
+  for (let file of files) {
+    let fileContent = fs.readFileSync(
+      path.join(process.cwd(), "articles", "text", file),
+      "utf8",
+    );
+    let match = frontmatterRegex.exec(fileContent);
+    let frontMatterBlock = match![1];
 
-export function getPaginatedHistoryArticleMetadata(
-  page: number,
-): ArticleMetadata[] {
-  let articles = getArticles(path.join(process.cwd(), 'articles', 'history'));
+    let currArticle: ArticleMetadata = {
+      title: "",
+      datePosted: new Date(),
+      author: "",
+      tags: [],
+      topic: "",
+      cover: "",
+      coverPhotographer: "",
+      coverLink: "",
+      type: "",
+    };
 
-  articles.forEach((article) => {
-    article.metadata.type = "history";
-  });
+    frontMatterBlock
+      .trim()
+      .split("\n")
+      .forEach((line) => {
+        let [key, value] = line.split(": ");
 
-  return articles
-    .slice((page - 1) * NUM_ARTICLES_PER_PAGE, page * NUM_ARTICLES_PER_PAGE)
-    .map((article) => article.metadata);
-}
+        if (key === "title") {
+          currArticle.title = value;
+        } else if (key === "postedOn") {
+          currArticle.datePosted = new Date(value);
+          currArticle.datePosted.setHours(
+            currArticle.datePosted.getHours() + 5,
+          );
+        } else if (key === "author") {
+          currArticle.author = value;
+        } else if (key === "tags") {
+          currArticle.tags = value.split(", ");
+        } else if (key === "topic") {
+          currArticle.topic = value;
+        } else if (key === "cover") {
+          currArticle.cover = value;
+        } else if (key === "cover_photographer") {
+          currArticle.coverPhotographer = value;
+        } else if (key === "cover_link") {
+          currArticle.coverLink = value;
+        }
+      });
 
-export function getPaginatedReviewMetadata(page: number): ArticleMetadata[] {
-  let articles = getArticles(path.join(process.cwd(), 'articles', 'reviews'));
-
-  articles.forEach((article) => {
-    article.metadata.type = "reviews";
-  });
-
-  return articles
-    .slice((page - 1) * NUM_ARTICLES_PER_PAGE, page * NUM_ARTICLES_PER_PAGE)
-    .map((article) => article.metadata);
-}
-
-export function getNewsArticles(): Article[] {
-  let articles = getArticles(path.join(process.cwd(), 'articles', 'news'));
-
-  articles.forEach((article) => {
-    article.metadata.type = "news";
-  });
-
-  return articles;
-}
-
-export function getReviews(): Article[] {
-  let articles = getArticles(path.join(process.cwd(), 'articles', 'reviews'));
-
-  articles.forEach((article) => {
-    article.metadata.type = "reviews";
-  });
-
-  return articles;
-}
-
-export function getHistoryArticles(): Article[] {
-  let articles = getArticles(path.join(process.cwd(), 'articles', 'history'));
-
-  articles.forEach((article) => {
-    article.metadata.type = "history";
-  });
+    if (currArticle.topic === topic) {
+      articles.push(currArticle);
+    }
+  }
 
   return articles;
 }
 
-export function getNumberOfNewsArticles(): number {
-  return fs.readdirSync(path.join(process.cwd(), 'articles', 'news')).length;
+export function getPaginatedArticleMetadata(topic: string, page: number) {
+  let articles = getArticlesByTopic(topic);
+
+  return articles.slice(
+    (page - 1) * NUM_ARTICLES_PER_PAGE,
+    page * NUM_ARTICLES_PER_PAGE,
+  );
 }
 
-export function getNumberOfHistoryArticles(): number {
-  return fs.readdirSync(path.join(process.cwd(), 'articles', 'history')).length;
+export function getRecentArticles(): ArticleMetadata[] {
+  let articles = getArticles(path.join(process.cwd(), "articles", "text"));
+
+  return articles
+    .map((article) => article.metadata)
+    .slice(0, NUM_ARTICLES_PER_PAGE);
 }
 
-export function getNumberOfReviews(): number {
-  return fs.readdirSync(path.join(process.cwd(), 'articles', 'reviews')).length;
-}
+export function getArticleBySlug(slug: string): Article | undefined {
+  let articles = getArticles(path.join(process.cwd(), "articles", "text"));
 
-export function getNewsArticleBySlug(slug: string): Article | undefined {
-  return getNewsArticles().find(
+  return articles.find(
     (article) =>
       article.metadata.title.toLowerCase().replaceAll(" ", "-") === slug,
   );
 }
 
-export function getHistoryArticleBySlug(slug: string): Article | undefined {
-  return getHistoryArticles().find(
-    (article) =>
-      article.metadata.title.toLowerCase().replaceAll(" ", "-") === slug,
-  );
-}
-
-export function getReviewBySlug(slug: string): Article | undefined {
-  return getReviews().find(
-    (article) =>
-      article.metadata.title.toLowerCase().replaceAll(" ", "-") === slug,
-  );
+export function getNumberOfArticlesByTopic(topic: string): number {
+  return getArticlesByTopic(topic).length;
 }
 
 export function getSearchResults(searchTerm: string): ArticleMetadata[] {
-  const articles = [
-    ...getNewsArticles(),
-    ...getHistoryArticles(),
-    ...getReviews(),
-  ].sort((a, b) => {
-    return b.metadata.datePosted.getTime() - a.metadata.datePosted.getTime();
-  });
+  const articles = getArticles(path.join(process.cwd(), "articles", "text"));
 
   searchTerm = searchTerm.replaceAll("-", " ");
 

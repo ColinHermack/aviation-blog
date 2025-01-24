@@ -5,16 +5,16 @@ export const siteConfig = {
   description: "News and travel reviews from the commercial aviation world.",
   navItems: [
     {
-      label: "News",
-      href: "/news",
+      label: "Aviation",
+      href: "/articles?topic=aviation",
     },
     {
-      label: "Reviews",
-      href: "/reviews",
+      label: "Travel",
+      href: "/articles?topic=travel",
     },
     {
-      label: "History",
-      href: "/history",
+      label: "Photography",
+      href: "/articles?topic=photography",
     },
   ],
 };

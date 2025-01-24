@@ -48,7 +48,7 @@ function formatDateString(date: Date): string {
 export default async function Page({
   params,
 }: {
-  params: Promise<{ slug: string }>
+  params: Promise<{ slug: string }>;
 }) {
   let slug = (await params).slug;
   const article: Article | undefined = getReviewBySlug(slug);

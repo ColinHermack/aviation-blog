@@ -1,4 +1,4 @@
-import { getPaginatedReviewMetadata } from "@/articles/utils";
+import { getPaginatedArticleMetadata } from "@/articles/utils";
 
 export function GET(request: Request): Response {
   try {
@@ -9,7 +9,10 @@ export function GET(request: Request): Response {
     } else {
       return new Response(
         JSON.stringify(
-          getPaginatedReviewMetadata(parseInt(request.headers.get("page")!)),
+          getPaginatedArticleMetadata(
+            String(request.headers.get("topic")!),
+            parseInt(request.headers.get("page")!),
+          ),
         ),
         { status: 200 },
       );

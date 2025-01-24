@@ -9,13 +9,13 @@ import { Card, CardBody, CardFooter } from "@nextui-org/card";
 import { Link } from "@nextui-org/link";
 import { Divider } from "@nextui-org/divider";
 import { Image } from "@nextui-org/image";
-
-import { ArticleMetadata } from "@/articles/utils";
 import { Suspense } from "react";
 
+import { ArticleMetadata } from "@/articles/utils";
+
 const Loading = () => {
-  return (<Spinner color="primary" size="lg" />);
-}
+  return <Spinner color="primary" size="lg" />;
+};
 
 function SearchResults() {
   const searchParams = useSearchParams();

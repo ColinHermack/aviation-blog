@@ -3,17 +3,15 @@ import { Metadata, Viewport } from "next";
 import { Link } from "@nextui-org/link";
 import clsx from "clsx";
 import { GeistSans } from "geist/font/sans";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { Providers } from "./providers";
 
 import { siteConfig } from "@/app/siteConfig";
 import { fontSans } from "@/app/fonts";
 import { Navbar } from "@/app/navbar";
-
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next"
-
-import Logo from '@/app/logo';
+import Logo from "@/app/logo";
 
 export const metadata: Metadata = {
   title: {

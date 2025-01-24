@@ -16,7 +16,7 @@ export default function ArticleCard(props: ArticleCardProps) {
     <Link
       key={props.title.toLowerCase().replace(" ", "-")}
       className="m-4"
-      href={`/${props.type}/${props.title.toLowerCase().replaceAll(" ", "-")}`}
+      href={`/article/${props.title.toLowerCase().replaceAll(" ", "-")}`}
     >
       <Card
         className="w-[350px] h-[175px] max-w-full flex flex-col justify-top align-center"
@@ -30,7 +30,7 @@ export default function ArticleCard(props: ArticleCardProps) {
             alt="Card background"
             className="rounded-xl object-cover"
             height={100}
-            src={`/${props.type}_images/${props.coverPhoto}`}
+            src={`/article_images/${props.coverPhoto}`}
             width={100}
           />
         </CardBody>

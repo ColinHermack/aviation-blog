@@ -4,15 +4,10 @@ import { Link } from "@nextui-org/link";
 
 import { siteConfig } from "@/app/siteConfig";
 import ArticleCard from "@/app/article-card";
-import {
-  ArticleMetadata,
-  getPaginatedNewsArticleMetadata,
-} from "@/articles/utils";
+import { ArticleMetadata, getRecentArticles } from "@/articles/utils";
 
 function LatestArticles() {
-  let latestArticles: ArticleMetadata[] = getPaginatedNewsArticleMetadata(
-    1,
-  ).slice(0, 3);
+  let latestArticles: ArticleMetadata[] = getRecentArticles().slice(0, 3);
 
   return latestArticles.map((article) => {
     return (

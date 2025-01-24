@@ -16,12 +16,10 @@ import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { Form } from "@nextui-org/form";
 import { Input } from "@nextui-org/input";
-import { FaPlaneDeparture } from "react-icons/fa";
 
 import { siteConfig } from "@/app/siteConfig";
 import { IconSvgProps } from "@/types";
 import { ThemeSwitch } from "@/app/theme-switch";
-
 import Logo from "@/app/logo";
 
 export const SearchIcon = (props: IconSvgProps) => (
