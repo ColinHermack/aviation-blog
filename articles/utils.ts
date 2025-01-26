@@ -145,6 +145,9 @@ export function getArticlesByTopic(topic: string): ArticleMetadata[] {
     }
   }
 
+  articles.sort((a, b) => {
+    return b.datePosted.getTime() - a.datePosted.getTime();
+  })
   return articles;
 }
 
@@ -205,4 +208,30 @@ export function getSearchResults(searchTerm: string): ArticleMetadata[] {
   return results
     .map((article) => article.metadata)
     .slice(0, NUM_ARTICLES_PER_PAGE);
+}
+
+export function getSimilarArticles(keywords: string[], title: string): ArticleMetadata[] {
+  const articles = getArticles(path.join(process.cwd(), "articles", "text"));
+
+  const results = articles.filter((article) => {
+    return keywords.every((keyword) =>
+      article.metadata.title.toLowerCase().includes(keyword.toLowerCase()),
+    );
+  });
+
+  let articleTitles: string[] = results.map((article) => article.metadata.title);
+
+  for (let i = 0; i < results.length; i++) {
+    if (results[i].metadata.title === title) {
+      results.splice(i, 1);
+    }
+  }
+
+  while (results.length < 3) {
+    let recentArticle = articles.find((article) => !articleTitles.includes(article.metadata.title));
+    articleTitles.push(recentArticle!.metadata.title);
+    results.push(recentArticle!);
+  }
+
+  return results.map((article) => article.metadata);
 }

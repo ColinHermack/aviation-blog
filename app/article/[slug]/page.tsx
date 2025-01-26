@@ -7,6 +7,7 @@ import html from "remark-html";
 import { FaCamera } from "react-icons/fa";
 
 import { Article, getArticleBySlug } from "@/articles/utils";
+import ArticleRecommender from '@/app/article/article-recommender';
 
 function formatDateString(date: Date): string {
   const days = [
@@ -90,6 +91,8 @@ export default async function Page({
         dangerouslySetInnerHTML={{ __html: articleContentHtml }}
         className="w-full text-left max-w-[800px] mx-8 mb-8 [&>p]:my-4 [&>p>a]:text-sky-600 [&>h2]:font-bold [&>h2]:my-4 [&>h2]:text-2xl [&>h3]:font-bold [&>h3]:my-4 [&>h3]:text-xl [&>h4]:font-bold [&>h4]:my-4 [&>h4]:text-lg [&>h5]:font-bold [&>h5]:my-4 [&>h5]:text-base [&>h6]:font-bold [&>h6]:my-4 [&>h6]:text-sm"
       />
+      <h2 className='text-3xl font-bold mb-8 mt-4'>Recommended</h2>
+      <ArticleRecommender keywords={article.metadata.tags} title={article.metadata.title} />
     </div>
   );
 }
