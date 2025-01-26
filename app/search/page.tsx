@@ -45,7 +45,7 @@ function SearchResults() {
       <Link
         key={article.title.toLowerCase().replace(" ", "-")}
         className="m-4"
-        href={`/${article.type}/${article.title.toLowerCase().replaceAll(" ", "-")}`}
+        href={`/article/${article.title.toLowerCase().replaceAll(" ", "-")}`}
       >
         <Card
           className="w-[350px] h-[175px] max-w-full flex flex-col justify-top align-center"
@@ -59,7 +59,7 @@ function SearchResults() {
               alt="Card background"
               className="rounded-xl object-cover"
               height={100}
-              src={`/${article.type}_images/${article.cover}`}
+              src={`/article_images/${article.cover}`}
               width={100}
             />
           </CardBody>
