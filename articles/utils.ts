@@ -147,7 +147,8 @@ export function getArticlesByTopic(topic: string): ArticleMetadata[] {
 
   articles.sort((a, b) => {
     return b.datePosted.getTime() - a.datePosted.getTime();
-  })
+  });
+
   return articles;
 }
 
@@ -210,7 +211,10 @@ export function getSearchResults(searchTerm: string): ArticleMetadata[] {
     .slice(0, NUM_ARTICLES_PER_PAGE);
 }
 
-export function getSimilarArticles(keywords: string[], title: string): ArticleMetadata[] {
+export function getSimilarArticles(
+  keywords: string[],
+  title: string,
+): ArticleMetadata[] {
   const articles = getArticles(path.join(process.cwd(), "articles", "text"));
 
   const results = articles.filter((article) => {
@@ -219,7 +223,9 @@ export function getSimilarArticles(keywords: string[], title: string): ArticleMe
     );
   });
 
-  let articleTitles: string[] = results.map((article) => article.metadata.title);
+  let articleTitles: string[] = results.map(
+    (article) => article.metadata.title,
+  );
 
   for (let i = 0; i < results.length; i++) {
     if (results[i].metadata.title === title) {
@@ -228,7 +234,10 @@ export function getSimilarArticles(keywords: string[], title: string): ArticleMe
   }
 
   while (results.length < 3) {
-    let recentArticle = articles.find((article) => !articleTitles.includes(article.metadata.title));
+    let recentArticle = articles.find(
+      (article) => !articleTitles.includes(article.metadata.title),
+    );
+
     articleTitles.push(recentArticle!.metadata.title);
     results.push(recentArticle!);
   }

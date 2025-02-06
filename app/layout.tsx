@@ -5,6 +5,7 @@ import clsx from "clsx";
 import { GeistSans } from "geist/font/sans";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { FaXTwitter } from "react-icons/fa6";
 
 import { Providers } from "./providers";
 
@@ -12,8 +13,6 @@ import { siteConfig } from "@/app/siteConfig";
 import { fontSans } from "@/app/fonts";
 import { Navbar } from "@/app/navbar";
 import Logo from "@/app/logo";
-
-import { FaXTwitter } from 'react-icons/fa6';
 
 export const metadata: Metadata = {
   title: {
@@ -56,13 +55,14 @@ export default function RootLayout({
               {children}
             </main>
             <footer className="w-full flex flex-col items-center justify-top py-10">
-              <Link
-                href='/'
-              >
+              <Link href="/">
                 <Logo size={60} />
               </Link>
-              <div className='flex justify-center items-center my-10'>
-                <Link href='https://x.com/TheAirTravelGuy' className='text-inherit'>
+              <div className="flex justify-center items-center my-10">
+                <Link
+                  className="text-inherit"
+                  href="https://x.com/TheAirTravelGuy"
+                >
                   <FaXTwitter size={30} />
                 </Link>
               </div>
